@@ -10,8 +10,10 @@ double timefs;
 
 void cleanup(void){
     tdel();
+    printf("\n");
 }
 void sigh(int snum){
+    (void) snum;
     exit(0);
 }
 int main(){
