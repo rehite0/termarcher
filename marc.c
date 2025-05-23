@@ -14,8 +14,8 @@ void rotate_x(float rad,vec3 in,vec3* out){
     float c = cos(rad);
     vec3 ret= {
 	    1.0*in[0]+0.0*in[1]+0.0*in[2],
-	    0.0*in[0]+c  *in[1]+s  *in[2],
-	    0.0*in[0]+-s *in[1]+c  *in[2]};
+	    0.0*in[0]+c  *in[1]+-s *in[2],
+	    0.0*in[0]+s  *in[1]+c  *in[2]};
     cpy3(*out,ret);
 }
 void rotate_y(float rad,vec3 in,vec3* out){
@@ -23,8 +23,8 @@ void rotate_y(float rad,vec3 in,vec3* out){
     float c = cos(rad);
     vec3 ret= {
 	    c  *in[0]+0.0*in[1]+s  *in[2],
-	    0.0*in[0]+0.1*in[1]+0.0*in[2],
-	    -s*in[0]+0.0*in[1]+c  *in[2]};
+	    0.0*in[0]+1.0*in[1]+0.0*in[2],
+	    -s *in[0]+0.0*in[1]+c  *in[2]};
     cpy3(*out,ret);
 }
 void rotate_z(float rad,vec3 in,vec3* out)
@@ -32,8 +32,8 @@ void rotate_z(float rad,vec3 in,vec3* out)
     float s = sin(rad); 
     float c = cos(rad);
     vec3 ret= {
-	    c  *in[0]+s  *in[1]+0.0*in[2],
-	    -s *in[0]+c  *in[1]+0.0*in[2],
+	    c  *in[0]+-s *in[1]+0.0*in[2],
+	    s  *in[0]+c  *in[1]+0.0*in[2],
 	    0.0*in[0]+0.0*in[1]+1.0*in[2]};
     cpy3(*out,ret);
 }
@@ -44,8 +44,8 @@ float sdtorus(vec3 p_,float R, float r){
     cpy3(p,p_);
     rotate_x(3.14/2.0, p, &temp);
     cpy3(p,temp);
-    //rotate_y(timefs,p,&temp);
-    //cpy3(p,temp);
+    rotate_y(timefs,p,&temp);
+    cpy3(p,temp);
     rotate_z(timefs,p,&temp);
     cpy3(p,temp);
     vec2 h={p[0],p[2]};

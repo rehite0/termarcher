@@ -1,13 +1,23 @@
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <signal.h>
 #include "term.h"
 #include "marc.h"
 
 double timefs;
 
+void cleanup(void){
+    tdel();
+}
+void sigh(int snum){
+    exit(0);
+}
 int main(){
     char charset[]={' ','.',',','+','*',';','o','e','$','@','#'};
+    atexit(cleanup);
+    sigaction(SIGINT, &((struct sigaction){.sa_handler=sigh}),0);
     tinit();
     int start=clock();
     while (1){
@@ -25,7 +35,6 @@ int main(){
 	    printf("\n");
 	}
     }
-    tdel();
 }
 
 

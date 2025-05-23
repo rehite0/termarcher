@@ -30,9 +30,10 @@ void tinit(){
 }
 
 void tdel(){
+    system("tput clear");
     system("tput rmcup");
     system("tput cnorm");
-    system("tput srg0");
+    system("tput sgr0");
 }
 
 char* spawn(char** argv){
